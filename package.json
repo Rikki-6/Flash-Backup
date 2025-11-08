@@ -1,6 +1,6 @@
 {
   "name": "flash-backup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Flash Backup",
   "main": "./out/main/index.js",
   "author": "HellBri8nger",
