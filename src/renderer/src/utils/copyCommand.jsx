@@ -16,19 +16,20 @@ export default function copyCommand({ name }){
       async function fetchData(){
         const id =  await window.electronAPI.getData('itemData','name', name)
         const appData = await window.electronAPI.getAppData()
+        const pythonPath = `${appData}/flash-backup/python/pythonw.exe`
 
         switch (selected){
           case "Steam":
             setInstructions("Right click on your game inside steam, Open properties and paste this into launch options.")
-            setCommand(`pythonw "${appData}/flash-backup/emitRequest.pyw" ${id.rows[0].id} %command%`)
+            setCommand(`${pythonPath} "${appData}/flash-backup/emitRequest.pyw" ${id.rows[0].id} %command%`)
             break
           case "Playnite":
             setInstructions("Right click on your game inside playnite, Click Edit and Scripts and paste this command in any of the 3 sections.")
-            setCommand(`Start-Process "pythonw "${appData}/flash-backup/emitRequest.pyw" ${id.rows[0].id}"`)
+            setCommand(`Start-Process "${pythonPath} "${appData}/flash-backup/emitRequest.pyw" ${id.rows[0].id}"`)
             break
           case "Shortcut":
             setInstructions("Right click on your shortcut then properties, Copy this command and paste it into the very beginning of 'Target' without removing anything else, you can also change the icon back to how it originally was using the options.")
-            setCommand(`pythonw "${appData}/flash-backup/emitRequest.exe" ${id.rows[0].id}`)
+            setCommand(`${pythonPath} "${appData}/flash-backup/emitRequest.exe" ${id.rows[0].id}`)
             break
         }
       }

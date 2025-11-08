@@ -11,16 +11,13 @@ export function checkPythonInstallation(path) {
     fs.copyFileSync("./emitRequest.pyw", join(path, "emitRequest.pyw"))
   }
 
-  exec('python --version', (error, stdout, stderr) => {
-    if (stderr && error){
-      allowCloseSetter(false)
+  if(!fs.existsSync(join(path, "python", "pythonw.exe"))){
+    extractZip("python.zip", path)
+  }
 
-      exec(`setx PATH "%PATH%${join(path, "python")}"`)
-      extractZip('python.zip', path)
-    }else{
-      exec(`pip install pywin32 requests`)
-    }
-  })
+  const { exec } = require("child_process")
+  exec(join(path, "python", "Scripts", `pip.exe install pywin32 requests`))
+
 }
 
 
